@@ -9,7 +9,7 @@
 <body class="bg-light d-flex align-items-center justify-content-center" style="height: 100vh;">
     <div class="card p-4" style="width: 400px;">
         <h2 class="text-center mb-4">Acceso Administrativo</h2>
-        <form method="POST" action="{{ route('admin.login') }}">
+        <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="mb-3">
                 <label for="username" class="form-label">Nombre de Usuario</label>

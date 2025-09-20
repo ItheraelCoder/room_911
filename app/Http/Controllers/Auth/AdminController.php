@@ -37,8 +37,8 @@ class AdminController extends Controller
     //Rutas para el login del usuario
     public function showLoginForm()
     {
-        return 'login form';
-        //return view('auth.login);
+        // return 'login form';
+        return view('auth.login');
     }
 
     public function login(Request $request)
@@ -53,7 +53,7 @@ class AdminController extends Controller
         if (Auth::guard('admin')->attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
-            return redirect()->intended('admin.dashboard');
+            return redirect()->intended('/admin/dashboard');
         }
 
         return back()->withErrors(['username' => 'Incorrect Credentials']);
@@ -66,6 +66,6 @@ class AdminController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/admin/login');
     }
 }

@@ -7,6 +7,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    @extends('layouts.admin')
+    
+    @section('title', 'Edit')
+    
+    @section('content')
     <div class="container mt-5">
         <h1 class="mb-4">Editar Empleado: {{ $employee->first_name }} {{ $employee->last_name }}</h1>
 
@@ -41,5 +46,6 @@
             <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
+    @endsection
 </body>
 </html>

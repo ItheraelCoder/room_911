@@ -7,6 +7,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    @extends('layouts.admin')
+    
+    @section('title', 'Dashboard')
+    
+    @section('content')
     <div class="container mt-5">
         <h1 class="mb-4">Menú Administrativo</h1>
         <div class="d-flex justify-content-end mb-3">
@@ -115,5 +120,9 @@
         </div>
     </div>
 </div>
+
+@endsection
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

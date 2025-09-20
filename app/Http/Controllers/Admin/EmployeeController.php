@@ -7,6 +7,8 @@ use App\Models\Department;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
+use League\Csv\Reader;
 
 class EmployeeController extends Controller
 {
@@ -14,27 +16,27 @@ class EmployeeController extends Controller
     public function index(Request $request)
     {
         $query = Employee::with('department');
-        
-        if($request->filled('search')){
+
+        if ($request->filled('search')) {
             $query->where('internal_id', $request->input('search'))
                 ->orWhere('first_name', 'like', '%' . $request->input('search') . '%')
                 ->orWhere('last_name', 'like', '%' . $request->input('search') . '%');
         }
 
 
-        if($request->filled('department_id')){
-            $query->where('department_id',$request->input('department_id'));
+        if ($request->filled('department_id')) {
+            $query->where('department_id', $request->input('department_id'));
         }
 
         $employees = $query->paginate(10);
         $departments = Department::all();
 
-        return view('admin.dashboard',compact('employees','departments'));
+        return view('admin.dashboard', compact('employees', 'departments'));
     }
 
     public function store(Request $request)
     {
-        $request -> validate([
+        $request->validate([
             'internal_id' => 'required|integer|unique:employees,internal_id',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -44,14 +46,9 @@ class EmployeeController extends Controller
 
         Employee::create($request->all());
 
-        return redirect()->route('admin.dashboard')->with('success','Employee registered.');
+        return redirect()->route('admin.dashboard')->with('success', 'Employee registered.');
     }
 
-
-    public function show(Employee $employee)
-    {
-        return view('admin.employees.show',compact('employee'));
-    }
 
     public function edit(Employee $employee)
     {
@@ -111,5 +108,42 @@ class EmployeeController extends Controller
         $departments = Department::all();
         return view('admin.employees.create', compact('departments'));
     }
-    
+
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:csv,txt|max:2048',
+        ]);
+
+        try {
+            // Obtiene el archivo subido y crea una instancia del lector de CSV
+            $csv = Reader::createFromPath($request->file('file')->getRealPath());
+            $csv->setHeaderOffset(0); // Establece la primera fila como encabezado
+
+            $records = $csv->getRecords(); // Obtiene todos los registros como un iterador
+
+            DB::beginTransaction();
+
+            foreach ($records as $record) {
+                // Utiliza los nombres de los encabezados para acceder a los datos
+                Employee::updateOrCreate(
+                    ['internal_id' => $record['internal_id']],
+                    [
+                        'first_name'    => $record['first_name'],
+                        'last_name'     => $record['last_name'],
+                        'department_id' => $record['department_id'],
+                        'has_access'    => filter_var($record['has_access'], FILTER_VALIDATE_BOOLEAN)
+                    ]
+                );
+            }
+
+            DB::commit();
+
+            return redirect()->route('admin.dashboard')->with('success', 'Empleados importados correctamente.');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('error', 'Ocurrió un error en la importación: ' . $e->getMessage());
+        }
+    }
 }
