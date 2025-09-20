@@ -1,61 +1,184 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# ROOM_911 - Sistema de Control de Acceso
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+    <img src="https://img.shields.io/badge/Laravel-11-FF2D20?style=for-the-badge&logo=laravel" alt="Laravel 11">
+    <img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php" alt="PHP 8.2+">
+    <img src="https://img.shields.io/badge/MySQL-Database-4479A1?style=for-the-badge&logo=mysql" alt="MySQL">
+    <img src="https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=for-the-badge&logo=bootstrap" alt="Bootstrap 5.3">
 </p>
 
-## About Laravel
+## 📋 Descripción del Proyecto
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**ROOM_911** es un sistema de control de acceso desarrollado en Laravel que permite gestionar y monitorear el acceso de empleados a áreas restringidas. El sistema proporciona un simulador de punto de acceso y un panel administrativo completo para la gestión de empleados y generación de reportes.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ Características Principales
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🔐 Sistema de Acceso
 
-## Learning Laravel
+-   **Simulador de Punto de Acceso**: Interface pública para registrar intentos de acceso
+-   **Verificación Automática**: Validación de permisos en tiempo real
+-   **Registro de Logs**: Histórico completo de todos los intentos de acceso
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 👥 Gestión de Empleados
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   **CRUD Completo**: Crear, leer, actualizar y eliminar empleados
+-   **Organización por Departamentos**: Estructura jerárquica de empleados
+-   **Gestión de Permisos**: Activar/desactivar acceso individualmente
+-   **Importación Masiva**: Carga de empleados desde archivos CSV
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 📊 Panel Administrativo
 
-## Laravel Sponsors
+-   **Dashboard Interactivo**: Vista general con filtros y búsquedas
+-   **Historial de Acceso**: Seguimiento detallado por empleado
+-   **Reportes PDF**: Generación de reportes descargables
+-   **Autenticación Segura**: Sistema de login para administradores
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🏗️ Arquitectura del Sistema
 
-### Premium Partners
+### Modelos de Datos
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+-   **Employee**: Información de empleados (ID interno, nombre, departamento, permisos)
+-   **Department**: Departamentos organizacionales
+-   **AccessLog**: Registro de intentos de acceso con timestamp y estado
+-   **Admin**: Usuarios administrativos del sistema
 
-## Contributing
+### Estados de Acceso
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+-   `granted`: Acceso concedido (empleado registrado con permisos)
+-   `denied`: Acceso denegado (empleado registrado sin permisos)
+-   `not_registered`: Empleado no encontrado en el sistema
 
-## Code of Conduct
+## 🚀 Instalación y Configuración
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Requisitos Previos
 
-## Security Vulnerabilities
+-   PHP 8.2 o superior
+-   Composer
+-   Node.js y npm
+-   MySQL/MariaDB
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Pasos de Instalación
 
-## License
+1. **Clonar el repositorio**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+git clone https://github.com/ItheraelCoder/room_911.git
+cd room_911
+```
+
+2. **Instalar dependencias**
+
+```bash
+composer install
+npm install
+```
+
+3. **Configurar el entorno**
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+4. **Configurar la base de datos**
+   Edita el archivo `.env` con tus credenciales de base de datos:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=room_911
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_contraseña
+```
+
+5. **Ejecutar migraciones**
+
+```bash
+php artisan migrate
+```
+
+6. **Compilar assets**
+
+```bash
+npm run build
+```
+
+7. **Iniciar el servidor**
+
+```bash
+php artisan serve
+```
+
+## 📖 Uso del Sistema
+
+### Para Empleados (Acceso Público)
+
+1. Accede a la URL principal del sistema
+2. Ingresa tu ID interno de empleado
+3. El sistema registrará automáticamente el intento de acceso
+
+### Para Administradores
+
+1. **Acceso al Panel**: Ve a `/admin/login`
+2. **Registro de Admin**: Si es la primera vez, registra un administrador en `/admin/register`
+3. **Dashboard**: Gestiona empleados, departamentos y visualiza logs
+4. **Importación**: Usa la función de importación CSV para cargar empleados masivamente
+5. **Reportes**: Genera y descarga reportes PDF del historial de acceso
+
+## 📁 Estructura del Proyecto
+
+```
+app/
+├── Http/Controllers/
+│   ├── AccessController.php        # Simulador de acceso
+│   ├── Admin/
+│   │   └── EmployeeController.php  # Gestión de empleados
+│   └── Auth/
+│       └── AdminController.php     # Autenticación admin
+├── Models/
+│   ├── Employee.php               # Modelo de empleados
+│   ├── Department.php            # Modelo de departamentos
+│   ├── AccessLog.php             # Modelo de logs
+│   └── Admin.php                 # Modelo de administradores
+resources/views/
+├── access_simulator.blade.php    # Vista del simulador
+├── admin/                        # Vistas administrativas
+└── layouts/                      # Layouts base
+```
+
+## 🛠️ Tecnologías Utilizadas
+
+-   **Backend**: Laravel 11, PHP 8.2+
+-   **Frontend**: Blade Templates, Bootstrap 5.3
+-   **Base de Datos**: MySQL/MariaDB
+-   **PDF Generation**: DomPDF
+-   **CSV Processing**: League CSV
+-   **Autenticación**: Sistema personalizado
+
+## 📝 Funcionalidades Futuras
+
+-   [ ] API REST para integración con sistemas externos
+-   [ ] Notificaciones en tiempo real
+-   [ ] Reportes avanzados con gráficos
+-   [ ] Integración con lectores de tarjetas RFID
+-   [ ] Auditoría de seguridad avanzada
+
+## 🤝 Contribuciones
+
+Las contribuciones son bienvenidas. Por favor:
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
+
+## 📞 Contacto
+
+**Desarrollador**: ItheraelCoder  
+**Proyecto**: [https://github.com/ItheraelCoder/room_911](https://github.com/ItheraelCoder/room_911)
