@@ -156,24 +156,6 @@ resources/views/
 -   **CSV Processing**: League CSV
 -   **Autenticación**: Sistema personalizado
 
-## 📝 Funcionalidades Futuras
-
--   [ ] API REST para integración con sistemas externos
--   [ ] Notificaciones en tiempo real
--   [ ] Reportes avanzados con gráficos
--   [ ] Integración con lectores de tarjetas RFID
--   [ ] Auditoría de seguridad avanzada
-
-## 🤝 Contribuciones
-
-Las contribuciones son bienvenidas. Por favor:
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
 ## 📄 Licencia
 
 Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
